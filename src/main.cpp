@@ -24,5 +24,4 @@ void loop()
 
   kStandardCore.loop();
   garageDoorDetection.loop();
-  delay(100);
 }
