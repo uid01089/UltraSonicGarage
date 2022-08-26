@@ -2,10 +2,12 @@
 #include <KStandardCore.h>
 #include "incredential.h"
 #include <GarageDoorDetection.h>
+#include <KBlink.h>
 
 // https://randomnerdtutorials.com/esp8266-pinout-reference-gpios/
 
 KStandardCore kStandardCore;
+KBlink kblink;
 
 GarageDoorDetection garageDoorDetection(&kStandardCore);
 
@@ -17,6 +19,8 @@ void setup()
 
   garageDoorDetection.setup();
   Serial.print("Ultrasonic Setup done\n");
+
+  kblink.setup(kStandardCore.getKSchedule(), 100, 3000);
 }
 
 void loop()
@@ -24,4 +28,5 @@ void loop()
 
   kStandardCore.loop();
   garageDoorDetection.loop();
+  kblink.loop();
 }
