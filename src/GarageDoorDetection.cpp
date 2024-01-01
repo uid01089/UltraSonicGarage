@@ -27,13 +27,13 @@ void GarageDoorDetection::loop()
 void GarageDoorDetection::clc_60s()
 {
     unsigned long distance = ultrasonic.measure();
-    kStandardCore->getKMqtt()->publish("/" + kStandardCore->getHostname() + "/torsensor/distance", String(distance).c_str());
+    kStandardCore->getKMqtt()->publish("/" +  kStandardCore->getTopicPathWithoutLeadingSlash() + "/distance", String(distance).c_str());
     Serial.print("distance: " + String(distance) + "\n");
     // Serial.println(kStandardCore->getHostname() + "/torsensor/distance");
 
     kStandardCore->getNTPClient()->update();
 
-    kStandardCore->getKMqtt()->publish("/" + kStandardCore->getHostname() + "/torsensor/time", kStandardCore->getNTPClient()->getFormattedTime().c_str());
+    kStandardCore->getKMqtt()->publish("/" +  kStandardCore->getTopicPathWithoutLeadingSlash() + "/time", kStandardCore->getNTPClient()->getFormattedTime().c_str());
     Serial.print("time: " + kStandardCore->getNTPClient()->getFormattedTime() + "\n");
 
     // Reschedule it again
